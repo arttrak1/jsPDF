@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "homepage": "https://github.com/arttrak1/jsPDF",
   "description": "Change the height and color of the table header was changed.",
-  "main": "dist/jspdf.min.js",
+  "main": "dist/jspdf.debug.js",
   "bugs": {
     "url": "https://github.com/arttrak1/jsPDF/issues"
   },
