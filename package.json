@@ -1,6 +1,6 @@
 {
   "name": "jspdf-table-ext",
-  "version": "1.0.03",
+  "version": "1.0.0",
   "homepage": "https://github.com/arttrak1/jsPDF",
   "description": "Change the height and color of the table header was changed.",
   "main": "dist/jspdf.min.js",
