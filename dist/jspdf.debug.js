@@ -8906,7 +8906,7 @@
     */
 
 
-    jsPDFAPI.cell = function (x, y, w, h, txt, ln, align) {
+    jsPDFAPI.cell = function (x, y, w, h, txt, ln, align) {           
       var curCell = getLastCellPosition();
       var pgAdded = false; // If this is not the first cell, we must change its position
 
@@ -8930,7 +8930,7 @@
 
 
           y = getLastCellPosition().y + getLastCellPosition().h;
-          if (pgAdded) y = margin + 10;
+          if (pgAdded && !this.printHeaders) y = margin + 10;
         }
       }
 
@@ -8941,7 +8941,7 @@
           this.rect(x, y, w, h);
         }
 
-        if (align === 'right') {
+        if (align === 'right') {          
           if (!(txt instanceof Array)) {
             txt = [txt];
           }
@@ -8951,7 +8951,7 @@
             var textSize = this.getStringUnitWidth(currentLine) * this.internal.getFontSize() / this.internal.scaleFactor;
             this.text(currentLine, x + w - textSize - padding, y + this.internal.getLineHeight() * (i + 1));
           }
-        } else {
+        } else {                   
           this.text(txt, x + padding, y + this.internal.getLineHeight());
         }
       }
@@ -9008,10 +9008,10 @@
      */
 
 
-    jsPDFAPI.table = function (x, y, data, headers, config) {
+    jsPDFAPI.table = function (x, y, data, headers, config) {            
       if (!data) {
         throw 'No data for PDF table';
-      }
+      } 
 
       var headerNames = [],
           headerPrompts = [],
@@ -9054,8 +9054,8 @@
           fontSize = config.css['font-size'] * 16;
         }
 
-        if (config.margins) {
-          margins = config.margins;
+        if (config.margins) {          
+          margins = config.margins;          
         }
       }
       /**
@@ -9077,6 +9077,8 @@
       this.setFontSize(fontSize);
       this.table_font_size = fontSize; // Set header values
 
+      var objectHeader = {}; // create object for calculate height in header
+
       if (headers === undefined || headers === null) {
         // No headers defined so we derive from data
         headerNames = Object.keys(data[0]);
@@ -9088,6 +9090,7 @@
           headerNames.push(header.name);
           headerPrompts.push(header.prompt);
           columnWidths[header.name] = header.width * px2pt;
+          objectHeader[header.name] = header.prompt;
         }
       } else {
         headerNames = headers;
@@ -9124,16 +9127,15 @@
 
 
       if (printHeaders) {
-        var lineHeight = this.calculateLineHeight(headerNames, columnWidths, headerPrompts.length ? headerPrompts : headerNames); // Construct the header row
+        
+        var lineHeight = this.calculateLineHeight(headerNames, columnWidths, objectHeader); // Construct the header row
 
         for (i = 0, ln = headerNames.length; i < ln; i += 1) {
           header = headerNames[i];
-          tableHeaderConfigs.push([x, y, columnWidths[header], lineHeight, String(headerPrompts.length ? headerPrompts[i] : header)]);
+          tableHeaderConfigs.push([x, y, columnWidths[header], lineHeight, objectHeader[headerNames[i]]]);
         } // Store the table header config
 
-
         this.setTableHeaderRow(tableHeaderConfigs); // Print the header for the start of the table
-
         this.printHeaderRow(1, false);
       } // Construct the data rows
 
@@ -9143,9 +9145,9 @@
         model = data[i];
         lineHeight = this.calculateLineHeight(headerNames, columnWidths, model);
 
-        for (j = 0, jln = headerNames.length; j < jln; j += 1) {
+        for (j = 0, jln = headerNames.length; j < jln; j += 1) {          
           header = headerNames[j];
-          this.cell(x, y, columnWidths[header], lineHeight, model[header], i + 2, header.align);
+          this.cell(x, y, columnWidths[header], lineHeight, model[header], i + 2);
         }
       }
 
@@ -9220,7 +9222,7 @@
       var tempHeaderConf = [];
 
       for (i = 0, ln = this.tableHeaderRow.length; i < ln; i += 1) {
-        this.setFillColor(200, 200, 200);
+        this.setFillColor(this.getFillColor());
         tableHeaderCell = this.tableHeaderRow[i];
 
         if (new_page) {

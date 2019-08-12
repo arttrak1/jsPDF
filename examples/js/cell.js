@@ -4,7 +4,7 @@ var generateData = function (amount) {
     var data =
     {
         coin: "100",
-        game_group: "GameGroup",
+        game_group: "Game Group Game Group Game Group",
         game_name: "XPTO2",
         game_version: "25",
         machine: "20485861",
@@ -36,5 +36,7 @@ function createHeaders(keys) {
 
 var headers = createHeaders(["id", "coin", "game_group", "game_name", "game_version", "machine", "vlt"]);
 
-var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: 'landscape' });
-doc.table(1, 1, generateData(100), headers, { autoSize: true });
+var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: 'portrait' });
+doc.setFillColor(120, 45, 60);
+doc.setLineHeightFactor(0.7); 
+doc.table(1, 1, generateData(50), headers, { autoSize: false, printHeaders: true });
