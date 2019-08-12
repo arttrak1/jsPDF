@@ -1,3 +1,4 @@
+This is a slight variation of jspdf. The height and color of the table header was changed.
 # jsPDF
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/MrRio/jsPDF.svg)](https://greenkeeper.io/)
