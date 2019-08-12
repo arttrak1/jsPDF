@@ -1,11 +1,11 @@
 {
-  "name": "jspdf",
-  "version": "1.5.3",
-  "homepage": "https://github.com/mrrio/jspdf",
-  "description": "PDF Document creation from JavaScript",
+  "name": "jspdf-table-ext",
+  "version": "1.0.03",
+  "homepage": "https://github.com/arttrak1/jsPDF",
+  "description": "Change the height and color of the table header was changed.",
   "main": "dist/jspdf.min.js",
   "bugs": {
-    "url": "https://github.com/MrRio/jsPDF/issues"
+    "url": "https://github.com/arttrak1/jsPDF/issues"
   },
   "files": [
     "dist/jspdf.debug.js",
@@ -17,7 +17,8 @@
   ],
   "types": "types/index.d.ts",
   "keywords": [
-    "pdf"
+    "pdf",
+    "table"
   ],
   "license": "MIT",
   "repository": {
