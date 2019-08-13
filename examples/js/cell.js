@@ -37,6 +37,6 @@ function createHeaders(keys) {
 var headers = createHeaders(["id", "coin", "game_group", "game_name", "game_version", "machine", "vlt"]);
 
 var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: 'portrait' });
-doc.setFillColor(120, 45, 60);
-doc.setLineHeightFactor(0.7); 
-doc.table(1, 1, generateData(50), headers, { autoSize: false, printHeaders: true });
+doc.setFillColor(120, 120, 60);
+doc.setLineHeightFactor(1.5); 
+doc.table(1, 1, generateData(5), headers, { autoSize: false, printHeaders: true });
